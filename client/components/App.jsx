@@ -1,34 +1,34 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { fetchFruits } from '../actions'
+import { getProducts } from '../actions'
 
 export class App extends React.Component {
-  state = {
-    fruits: []
-  }
-
+  
   componentDidMount () {
-    this.props.dispatch(fetchFruits())
+    getProducts()
+    .then(products => {
+        this.props.dispatch(getProducts(products))
+    })
   }
 
-  render () {
-    return (
-      <div className='app'>
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
-        <ul>
-          {this.props.fruits.map(fruit => (
-            <li key={fruit}>{fruit}</li>
-          ))}
+render () {
+    return ( 
+      <>
+      <h1>Products</h1>
+        <ul className="product-list">
+            {this.props.products.map((item, id) => {
+                return <Product key={id} id={id} price={price} />
+            })}
         </ul>
-      </div>
+     </>
     )
   }
-}
+}  
 
 function mapStateToProps (globalState) {
   return {
-    fruits: globalState.fruits
+    products: globalState.products
   }
 }
 

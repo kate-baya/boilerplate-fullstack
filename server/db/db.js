@@ -6,6 +6,19 @@ const connection = knex(config[env])
 function listProducts (db = connection) {
     return db('products').select()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
     listProducts
 }
